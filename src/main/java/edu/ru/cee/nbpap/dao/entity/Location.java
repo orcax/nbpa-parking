@@ -10,16 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Demo")
-public class Demo implements Serializable {
+@Table(name = "Location")
+public class Location implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6110810356254593800L;
+	private static final long serialVersionUID = -414896660262497977L;
 	
 	private int id;
 	private String name;
+	private int capacity;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,14 +32,23 @@ public class Demo implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	@Column(name = "Name")
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Column(name = "Capacity")
+	public int getCapacity() {
+		return capacity;
+	}
+	
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 }
