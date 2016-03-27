@@ -11,10 +11,12 @@ public class HbmDemoDao implements DemoDao {
 	@Autowired
 	private HibernateTemplate template;
 
+	@Override
 	public Demo getDemoById(int id) {
 		return template.get(Demo.class, id);
 	}
 
+	@Override
 	public Demo addDemo(String name) {
 		Demo demo = new Demo();
 		demo.setName(name);

@@ -11,10 +11,12 @@ public class DemoServiceImpl implements DemoService {
 	@Autowired
 	private DemoDao demoDao;
 
+	@Override
 	public Demo getDemoById(int id) {
 		return demoDao.getDemoById(id);
 	}
 
+	@Override
 	public Demo addDemo(String name) {
 		return demoDao.addDemo(name);
 	}
