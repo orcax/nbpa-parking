@@ -16,12 +16,13 @@ git push -u origin master
 
   **Method:** `GET`
   
-  **URL Params:** `id=[integer]`
-
-  **Data Params:**  None
-
-  **Success Response:**
-  * **Code:** 200 <br />
-    **Content:** `{ id : 12, name : "Michael Bloom" }`
+  **Data Params:** 
+  * `location=[string]`
+  * `start_date=[mm/dd/yyyy]`
+  * `end_date=[mm/dd/yyyy]`
+  * `weekdays=[list of integers among 1-7]`(separated by comma)
+  * `start_time=[hh:mm]`
+  * `end_time=[hh:mm]`
+  * `columns=[list of strings among 'daily','monthly','total']`(separated by comma)
 
 
