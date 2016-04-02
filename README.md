@@ -18,11 +18,11 @@ git push -u origin master
   
   **Data Params:** 
   * `location=[list of strings]`
-  * `start_date=[mm/dd/yyyy]`
-  * `end_date=[mm/dd/yyyy]`
+  * `startDate=[mm/dd/yyyy]`
+  * `endDate=[mm/dd/yyyy]`
   * `weekdays=[list of integers among 1-7]`(separated by comma)
-  * `start_time=[hh:mm]`
-  * `end_time=[hh:mm]`
+  * `startTime=[hh:mm]`
+  * `endTime=[hh:mm]`
   * `columns=[list of strings among 'daily','monthly','total','rate']`(separated by comma)
 
 
