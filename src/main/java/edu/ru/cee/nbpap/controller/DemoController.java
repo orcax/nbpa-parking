@@ -31,10 +31,12 @@ public class DemoController {
 		return demoService.addDemo(name);
 	}
 	
+	/*
 	@RequestMapping("occupancy")
 	@ResponseBody
 	public Occupancy getOccupancyById(@RequestParam(value = "id") int id) {
 		return occupancyService.getOccupancyById(id);
 	}
+	*/
 
 }
