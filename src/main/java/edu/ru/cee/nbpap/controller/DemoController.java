@@ -19,7 +19,7 @@ public class DemoController {
 	@Autowired
 	private OccupancyService occupancyService;
 	
-	@RequestMapping("")
+	@RequestMapping("demo")
 	@ResponseBody
 	public Demo getDemoById(@RequestParam(value = "id") int id) {
 		return demoService.getDemoById(id);
