@@ -29,6 +29,7 @@ public class HbmOccupancyDao implements OccupancyDao {
 	public List<Occupancy> search(String location, Date startDate,
 			Date endDate, List<Integer> weekdays, List<String> columns) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Occupancy.class);
+		criteria.createAlias("location", "l").add(Restrictions.eq("l.name", location));
 		criteria.add(Restrictions.between("datetime", startDate, endDate));
 		criteria.add(Restrictions.in("weekday", weekdays));
 		ProjectionList projectionList = Projections.projectionList();
