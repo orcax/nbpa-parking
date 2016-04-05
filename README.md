@@ -23,6 +23,5 @@ git push -u origin master
   * `weekdays=[list of integers among 1-7]`(separated by comma)
   * `startTime=[hh:mm]`
   * `endTime=[hh:mm]`
-  * `columns=[list of strings among 'daily','monthly','total','rate']`(separated by comma)
 
 
