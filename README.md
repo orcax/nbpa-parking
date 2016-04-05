@@ -17,7 +17,7 @@ git push -u origin master
   **Method:** `GET`
   
   **Data Params:** 
-  * `location=[list of strings]`
+  * `location=[string]`
   * `startDate=[mm/dd/yyyy]`
   * `endDate=[mm/dd/yyyy]`
   * `weekdays=[list of integers among 1-7]`(separated by comma)
