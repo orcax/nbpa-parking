@@ -14,27 +14,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Occupancy")
+@Table(name = "occupancy")
 public class Occupancy implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6477898278366161236L;
 	
 	private int id;
 	private Location location;
-	private Date startHour;
+	private Date datetime;
 	private int weekday;
-	private int ticketNo;
-	private int ccExpressNo;
-	private int monthlyNo;
-	private int dailyTotalNo;
-	private float occupancy;
+	private int dailyNumber;
+	private int monthlyNumber;
+	private int totalNumber;
+	private double occupancy;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return id;
 	}
@@ -44,7 +40,7 @@ public class Occupancy implements Serializable {
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "LocationId")
+	@JoinColumn(name = "location_id")
 	public Location getLocation() {
 		return location;
 	}
@@ -52,68 +48,59 @@ public class Occupancy implements Serializable {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
-	@Column(name = "StartHour")
-	public Date getStartHour() {
-		return startHour;
-	}
-	
-	public void setStartHour(Date startHour) {
-		this.startHour = startHour;
-	}
 
-	@Column(name = "Weekday")
-	public int getWeekday() {
-		return weekday;
-	}
+	@Column(name = "datetime")
+    public Date getDatetime() {
+        return datetime;
+    }
 
-	public void setWeekday(int weekday) {
-		this.weekday = weekday;
-	}
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
 
-	@Column(name = "TicketNo")
-	public int getTicketNo() {
-		return ticketNo;
-	}
+	@Column(name = "weekday")
+    public int getWeekday() {
+        return weekday;
+    }
 
-	public void setTicketNo(int ticketNo) {
-		this.ticketNo = ticketNo;
-	}
+    public void setWeekday(int weekday) {
+        this.weekday = weekday;
+    }
 
-	@Column(name = "CcExpressNo")
-	public int getCcExpressNo() {
-		return ccExpressNo;
-	}
+	@Column(name = "daily_number")
+    public int getDailyNumber() {
+        return dailyNumber;
+    }
 
-	public void setCcExpressNo(int ccExpressNo) {
-		this.ccExpressNo = ccExpressNo;
-	}
+    public void setDailyNumber(int dailyNumber) {
+        this.dailyNumber = dailyNumber;
+    }
 
-	@Column(name = "MonthlyNo")
-	public int getMonthlyNo() {
-		return monthlyNo;
-	}
+	@Column(name = "monthly_number")
+    public int getMonthlyNumber() {
+        return monthlyNumber;
+    }
 
-	public void setMonthlyNo(int monthlyNo) {
-		this.monthlyNo = monthlyNo;
-	}
+    public void setMonthlyNumber(int monthlyNumber) {
+        this.monthlyNumber = monthlyNumber;
+    }
 
-	@Column(name = "DailyTotalNo")
-	public int getDailyTotalNo() {
-		return dailyTotalNo;
-	}
+	@Column(name = "total_number")
+    public int getTotalNumber() {
+        return totalNumber;
+    }
 
-	public void setDailyTotalNo(int dailyTotalNo) {
-		this.dailyTotalNo = dailyTotalNo;
-	}
+    public void setTotalNumber(int totalNumber) {
+        this.totalNumber = totalNumber;
+    }
 
-	@Column(name = "Occupancy")
-	public float getOccupancy() {
-		return occupancy;
-	}
+	@Column(name = "occupancy")
+    public double getOccupancy() {
+        return occupancy;
+    }
 
-	public void setOccupancy(float occupancy) {
-		this.occupancy = occupancy;
-	}
+    public void setOccupancy(double occupancy) {
+        this.occupancy = occupancy;
+    }
 
-}
+}	

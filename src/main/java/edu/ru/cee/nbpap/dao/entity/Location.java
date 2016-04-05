@@ -10,12 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Location")
+@Table(name = "location")
 public class Location implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -414896660262497977L;
 	
 	private int id;
@@ -24,7 +21,7 @@ public class Location implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return id;
 	}
@@ -33,7 +30,7 @@ public class Location implements Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "Name")
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -42,7 +39,7 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 	
-	@Column(name = "Capacity")
+	@Column(name = "capacity")
 	public int getCapacity() {
 		return capacity;
 	}
