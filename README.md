@@ -16,12 +16,28 @@ git push -u origin master
 
   **Method:** `GET`
   
-  **Data Params:** 
-  * `location=[string]`
-  * `startDate=[mm/dd/yyyy]`
-  * `endDate=[mm/dd/yyyy]`
-  * `weekdays=[list of integers among 1-7]`(separated by comma)
-  * `startTime=[hh:mm]`
-  * `endTime=[hh:mm]`
+  **Data Params:**
+  ```
+  * location=[string]
+  * startDate=[mm/dd/yyyy]
+  * endDate=[mm/dd/yyyy]
+  * weekdays=[list of integers among 1-7](separated by comma)
+  * startTime=[hh:mm]
+  * endTime=[hh:mm]
+  ```
+  
+* **Calculate average value for hourly data by conditions.**
+  
+  **URL:** /occupancy/meanHour
+  
+  ** Method:** `GET`
+ 
+  ** Data Params:**
+  ```
+  * location=[string]
+  * startDate=[mm/dd/yyyy]
+  * endDate=[mm/dd/yyyy]
+  * weekdays=[integer from 1-7]
+  ```
 
 
