@@ -30,9 +30,9 @@ git push -u origin master
   
   **URL:** /occupancy/meanHour
   
-  ** Method:** `GET`
+  **Method:** `GET`
  
-  ** Data Params:**
+  **Data Params:**
   ```
   * location=[string]
   * startDate=[mm/dd/yyyy]
