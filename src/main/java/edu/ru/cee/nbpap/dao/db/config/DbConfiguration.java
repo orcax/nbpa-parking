@@ -68,7 +68,7 @@ public class DbConfiguration {
 	public Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", hibernateDialect);
-		properties.put("show_sql", showSql);
+		properties.put("hibernate.show_sql", showSql);
 		return properties;
 	}
 	

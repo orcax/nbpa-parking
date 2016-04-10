@@ -1,13 +1,20 @@
 package edu.ru.cee.nbpap.dao.impl;
 
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +23,8 @@ import edu.ru.cee.nbpap.dao.entity.Occupancy;
 
 @Repository
 public class HbmOccupancyDao implements OccupancyDao {
+	
+	private static final String BASE_SEARCH_HQL = "from Occupancy where 1 = 1";
 	
 	@Autowired
 	private HibernateTemplate template;
@@ -26,18 +35,91 @@ public class HbmOccupancyDao implements OccupancyDao {
 	}
 
 	@Override
-	public List<Occupancy> search(String location, Date startDate,
-			Date endDate, List<Integer> weekdays, List<String> columns) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Occupancy.class);
-		criteria.createAlias("location", "l").add(Restrictions.eq("l.name", location));
-		criteria.add(Restrictions.between("datetime", startDate, endDate));
-		criteria.add(Restrictions.in("weekday", weekdays));
-		ProjectionList projectionList = Projections.projectionList();
-		for (String column : columns) {
-			projectionList.add(Projections.property(column));
+	public List<Occupancy> search(final String location, final Date startDate,
+			final Date endDate, final List<Integer> weekdays, final Date startTime, final Date endTime) {
+		return template.execute(new HibernateCallback<List<Occupancy>>() {
+
+			@Override
+			public List<Occupancy> doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Map<String, Object> parameters = new HashMap<String, Object>();
+				String hql = BASE_SEARCH_HQL;
+				hql += (buildLocationClause(location, parameters) +
+						buildStartEndDateClause(startDate, endDate, parameters) +
+						buildWeekdaysClause(weekdays, parameters) +
+						buildStartEndTimeClause(startTime, endTime, parameters));
+				Query query = session.createQuery(hql);
+				setParameters(query, parameters);
+				return query.list();
+			}
+			
+		});
+	}
+	
+	private void setParameters(Query query, Map<String, Object> parameters) {
+		for (Entry<String, Object> entry : parameters.entrySet()) {
+			Object value = entry.getValue();
+			if (value instanceof Collection) {
+				query.setParameterList(entry.getKey(), (Collection) value);
+			} else {
+				query.setParameter(entry.getKey(), value);
+			}
 		}
-		criteria.setProjection(projectionList);
-		return (List<Occupancy>) template.findByCriteria(criteria);
+	}
+	
+	private String buildLocationClause(String location, Map<String, Object> parameters) {
+		if (StringUtils.isNotEmpty(location)) {
+			parameters.put("location", location);
+			return " and location.name = :location";
+		}
+		return StringUtils.EMPTY;
+	}
+	
+	private String buildStartEndDateClause(Date startDate, Date endDate, Map<String, Object> parameters) {
+		String clause = StringUtils.EMPTY;
+		if (startDate != null && endDate != null) {
+			clause = " and (datetime >= :startDate and datetime <= :endDate)";
+			parameters.put("startDate", startDate);
+			parameters.put("endDate", stretchEndDate(endDate));
+		} else if (startDate != null) {
+			clause = " and datetime >= :startDate";
+			parameters.put("startDate", startDate);
+		} else if (endDate != null) {
+			clause = " and datetime <= :endDate";
+			parameters.put("endDate", stretchEndDate(endDate));
+		}
+		return clause;
+	}
+	
+	private Date stretchEndDate(Date endDate) {
+		endDate.setHours(23);
+		endDate.setMinutes(59);
+		endDate.setSeconds(59);
+		return endDate;
+	}
+	
+	private String buildWeekdaysClause(List<Integer> weekdays, Map<String, Object> parameters) {
+		if (CollectionUtils.isNotEmpty(weekdays)) {
+			parameters.put("weekdays", weekdays);
+			return " and weekday in (:weekdays)";
+		}
+		return StringUtils.EMPTY;
+	}
+	
+	private String buildStartEndTimeClause(Date startTime, Date endTime, Map<String, Object> parameters) {
+		String clause = StringUtils.EMPTY;
+		if (startTime != null && endTime != null) {
+			clause = " and (cast(datetime as time) >= :startTime and cast(datetime as time) <= :endTime)";
+			parameters.put("startTime", startTime);
+			parameters.put("endTime", endTime);
+		} else if (startTime != null) {
+			clause = " and cast(datetime as time) >= :startTime";
+			parameters.put("startTime", startTime);
+		} else if (endTime != null) {
+			clause = " and cast(datetime as time) <= :endTime";
+			parameters.put("endTime", endTime);
+		}
+		return clause;
 	}
 
 }

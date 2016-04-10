@@ -25,12 +25,15 @@ public class OccupancyServiceImpl implements OccupancyService {
 
 	@Override
 	public List<Occupancy> search(String location, Date startDate,
-			Date endDate, String weekdays, String columns) {
+			Date endDate, String weekdays, Date startTime, Date endTime) {
 		return occupancyDao.search(location, startDate, endDate,
-				parseWeekdays(weekdays), Arrays.asList(columns.split(",")));
+				parseWeekdays(weekdays), startTime, endTime);
 	}
 	
 	private List<Integer> parseWeekdays(String weekdays) {
+		if (weekdays == null) {
+			return null;
+		}
 		List<String> splittedWeekdays = Arrays.asList(weekdays.split(","));
 		List<Integer> parsedWeekdays = new ArrayList<Integer>();
 		for (String splittedWeekday : splittedWeekdays) {

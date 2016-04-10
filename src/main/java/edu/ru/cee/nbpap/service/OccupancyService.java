@@ -9,6 +9,6 @@ public interface OccupancyService {
 	
 	Occupancy getOccupancyById(int id);
 	List<Occupancy> search(String location, Date startDate, Date endDate,
-			String weekdays, String columns);
+			String weekdays, Date startTime, Date endTime);
 
 }

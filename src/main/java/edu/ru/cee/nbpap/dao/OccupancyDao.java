@@ -9,6 +9,6 @@ public interface OccupancyDao {
 	
 	Occupancy getOccupancyById(int id);
 	List<Occupancy> search(String location, Date startDate, Date endDate,
-			List<Integer> weekdays, List<String> columns);
+			List<Integer> weekdays, Date startTime, Date endTime);
 
 }
