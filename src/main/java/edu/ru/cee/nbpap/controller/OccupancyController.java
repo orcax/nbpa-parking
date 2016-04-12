@@ -17,12 +17,13 @@ import edu.ru.cee.nbpap.statistic.entity.Statistic;
 import edu.ru.cee.nbpap.statistic.entity.StatisticType;
 
 @Controller
+@RequestMapping(value = "/api/occupancy")
 public class OccupancyController {
-	
-	@Autowired
-	private OccupancyService service;
 
-    @RequestMapping(value = "/occupancy", method = RequestMethod.GET)
+    @Autowired
+    private OccupancyService service;
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public List<Occupancy> search(
             @RequestParam(required = false) String location,
@@ -31,10 +32,11 @@ public class OccupancyController {
             @RequestParam(required = false) String weekdays,
             @RequestParam(required = false) @DateTimeFormat(pattern = "HH:mm") Date startTime,
             @RequestParam(required = false) @DateTimeFormat(pattern = "HH:mm") Date endTime) {
-        return service.search(location, startDate, endDate, weekdays, startTime, endTime);
+        return service.search(location, startDate, endDate, weekdays,
+                startTime, endTime);
     }
-    
-    @RequestMapping(value = "/occupancy/meanHour", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/meanhour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> meanHour(
             @RequestParam(required = false) String location,
@@ -44,9 +46,10 @@ public class OccupancyController {
             @RequestParam(required = false) Integer weekday,
             @RequestParam(required = false) Double max,
             @RequestParam(required = false) Double min) {
-        return service.getColumnStatistics(location, column, startDate, endDate, weekday, max, min, StatisticType.AVG);
+        return service.getColumnStatistics(location, column, startDate,
+                endDate, weekday, max, min, StatisticType.AVG);
     }
-    
+
     @RequestMapping(value = "/occupancy/stdHour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> stdHour(
@@ -57,6 +60,7 @@ public class OccupancyController {
             @RequestParam(required = false) Integer weekday,
             @RequestParam(required = false) Double max,
             @RequestParam(required = false) Double min) {
-        return service.getColumnStatistics(location, column, startDate, endDate, weekday, max, min, StatisticType.STD);
+        return service.getColumnStatistics(location, column, startDate,
+                endDate, weekday, max, min, StatisticType.STD);
     }
 }

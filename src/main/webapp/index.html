@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nbpaApp">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,21 +13,30 @@
 <![endif]-->
 <script src="scripts/lib/jquery.min.js"></script>
 <script src="scripts/lib/bootstrap.min.js"></script>
-<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="scripts/lib/angular.min.js"></script>
+<script src="scripts/lib/angular-route.min.js"></script>
+<script src="scripts/lib/angular-sanitize.min.js"></script>
+<script src="scripts/lib/loader.js"></script>
 <script src="scripts/index.js"></script>
+<script src="scripts/controller.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header warning">
-      <a href="" class="navbar-brand" style="color:white;">NBPA Parking</a>
-    </div>
-  </div> <!-- /.container -->
-</nav>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="collapse navbar-collapse" ng-controller="NavCtrl">
+        <ul class="nav navbar-nav">
+          <li ng-class="{active:isActive('/home')}">
+            <a href="#/home">HOME</a>
+          </li>
+          <li ng-class="{active:isActive('/stats')}">
+            <a href="#/stats">STATISTICS</a>
+          </li>
+        </ul>
+      </div> <!-- /.collapse.navbar-collapse -->
+    </div> <!-- /.container -->
+  </nav>
 
-<div class="container">
-<h1>Hello world!</h1>
-</div> <!-- /.container -->
+  <div class="container" ng-view></div> <!-- /.container -->
 
 </body>
