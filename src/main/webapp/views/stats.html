@@ -7,16 +7,28 @@
       <div class="form-group">
         <label for="location">Location:</label> 
         <select class="form-control" id="location">
-          <option>DPWellness</option>
+          <option value="DPWellness">DPWellness</option>
         </select>
       </div>
       <div class="form-group">
         <label for="attribute">Attribute:</label> 
         <select class="form-control" id="attribute">
-          <option>Daily</option>
-          <option>Monthly</option>
-          <option>Total</option>
-          <option>Rate</option>
+          <option value="dailyNumber">Daily</option>
+          <option value="monthlyNumber">Monthly</option>
+          <option value="totalNumber">Total</option>
+          <option value="occupancy">Occupancy</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="weekday">Weekday:</label> 
+        <select class="form-control" id="weekday">
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+          <option value="7">Sunday</option>
         </select>
       </div>
       <button class="btn btn-default" ng-click="plotChart()">Plot</button>

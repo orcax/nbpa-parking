@@ -50,7 +50,7 @@ public class OccupancyController {
                 endDate, weekday, max, min, StatisticType.AVG);
     }
 
-    @RequestMapping(value = "/occupancy/stdHour", method = RequestMethod.GET)
+    @RequestMapping(value = "/occupancy/stdhour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> stdHour(
             @RequestParam(required = false) String location,

@@ -1,6 +1,7 @@
 'use strict';
 
 var APP_NAME = 'nbpaApp';
+var HOST_URL = 'http://localhost:8080';
 
 /**
  * Initialize AngularJs app
