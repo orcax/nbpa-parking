@@ -1,4 +1,27 @@
-<h1>Statistics</h1>
-
 <div class="panel panel-default">
-</div>
+  <div class="panel-heading">
+    <span>Basic Statistics</span>
+  </div>
+  <div class="panel-body">
+    <div class="form-inline">
+      <div class="form-group">
+        <label for="location">Location:</label> 
+        <select class="form-control" id="location">
+          <option>DPWellness</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="attribute">Attribute:</label> 
+        <select class="form-control" id="attribute">
+          <option>Daily</option>
+          <option>Monthly</option>
+          <option>Total</option>
+          <option>Rate</option>
+        </select>
+      </div>
+      <button class="btn btn-default" ng-click="plotChart()">Plot</button>
+    </div>
+    <hr>
+    <div google-chart chart="chartObject" style="width:100%; height:500px;"></div>
+  </div> <!-- /.panel-body -->
+</div> <!-- /.panel -->

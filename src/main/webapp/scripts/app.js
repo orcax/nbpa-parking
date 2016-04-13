@@ -1,8 +1,19 @@
-var nbpaApp = angular.module('nbpaApp', [
+'use strict';
+
+var APP_NAME = 'nbpaApp';
+
+/**
+ * Initialize AngularJs app
+ */
+var nbpaApp = angular.module(APP_NAME, [
   'ngRoute',
-  'nbpaControllers'
+  'ngSanitize',
+  'googlechart'
 ]);
 
+/**
+ * Configure routing
+ */
 nbpaApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
