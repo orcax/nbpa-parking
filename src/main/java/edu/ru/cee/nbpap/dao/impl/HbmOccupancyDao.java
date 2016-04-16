@@ -27,7 +27,9 @@ public class HbmOccupancyDao implements OccupancyDao {
 	
 	private static final String BASE_SEARCH_HQL = "from Occupancy where 1 = 1";
 	private static final String STATISTIC_HQL_PREFIX = "select cast(datetime as time), %s " + BASE_SEARCH_HQL;
-	private static final String STATISTIC_HQL_SUFFIX = "group by cast(datetime as time)";
+	private static final String STATISTIC_HQL_SUFFIX = "group by cast(datetime as time) order by cast(datetime as time)";
+	private static final String M_STATISTIC_HQL_PREFIX = "select cast(datetime as time), %s, weekday " + BASE_SEARCH_HQL;
+	private static final String M_STATISTIC_HQL_SUFFIX = "group by weekday, cast(datetime as time) order by weekday, cast(datetime as time)";
 	
 	@Autowired
 	private HibernateTemplate template;
@@ -50,7 +52,8 @@ public class HbmOccupancyDao implements OccupancyDao {
 				hql += (buildLocationClause(location, parameters) +
 						buildStartEndDateClause(startDate, endDate, parameters) +
 						buildWeekdaysClause(weekdays, parameters) +
-						buildStartEndTimeClause(startTime, endTime, parameters));
+						buildStartEndTimeClause(startTime, endTime, parameters)) +
+						" order by datetime";
 				Query query = session.createQuery(hql);
 				setParameters(query, parameters);
 				return query.list();
@@ -171,6 +174,30 @@ public class HbmOccupancyDao implements OccupancyDao {
 			parameters.put("min", min);
 		}
 		return clause;
+	}
+
+	@Override
+	public List<Object[]> getColumnStatistics(final String location, final String column,
+			final Date startDate, final Date endDate, final List<Integer> weekdays, final Double max,
+			final Double min, final StatisticType type) {
+		return template.execute(new HibernateCallback<List<Object[]>>() {
+
+			@Override
+			public List<Object[]> doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Map<String, Object> parameters = new HashMap<String, Object>();
+				String hql = String.format(M_STATISTIC_HQL_PREFIX, type.name() + "(" + column + ")") +
+						buildLocationClause(location, parameters) +
+						buildStartEndDateClause(startDate, endDate, parameters) +
+						buildWeekdaysClause(weekdays, parameters) +
+						buildRangeClause(column, max, min, parameters) +
+						" " + M_STATISTIC_HQL_SUFFIX;
+				Query query = session.createQuery(hql);
+				setParameters(query, parameters);
+				return query.list();
+			}
+			
+		});
 	}
 
 }

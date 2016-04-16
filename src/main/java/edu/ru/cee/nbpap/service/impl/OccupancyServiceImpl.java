@@ -3,7 +3,9 @@ package edu.ru.cee.nbpap.service.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,24 @@ public class OccupancyServiceImpl implements OccupancyService {
 			List<Statistic> statistics = new ArrayList<Statistic>();
 			for (Object[] obj : objs) {
 				statistics.add(new Statistic((Date) obj[0], (Double) obj[1], type));
+			}
+			return statistics;
+		}
+		return null;
+	}
+
+	@Override
+	public Map<Integer, List<Statistic>> getColumnStatistics(String location,
+			String column, Date startDate, Date endDate, String weekdays,
+			Double max, Double min, StatisticType type) {
+		List<Object[]> objs = occupancyDao.getColumnStatistics(location, column, startDate, endDate, parseWeekdays(weekdays), max, min, type);
+		if (CollectionUtils.isNotEmpty(objs)) {
+			Map<Integer, List<Statistic>> statistics = new HashMap<Integer, List<Statistic>>();
+			for (Object[] obj : objs) {
+				if (statistics.get(obj[2]) == null) {
+					statistics.put((Integer) obj[2], new ArrayList<Statistic>());
+				}
+				statistics.get(obj[2]).add(new Statistic((Date) obj[0], (Double) obj[1], type));
 			}
 			return statistics;
 		}

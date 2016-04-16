@@ -2,6 +2,7 @@ package edu.ru.cee.nbpap.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import edu.ru.cee.nbpap.dao.entity.Occupancy;
 import edu.ru.cee.nbpap.statistic.entity.Statistic;
@@ -14,5 +15,7 @@ public interface OccupancyService {
 			String weekdays, Date startTime, Date endTime);
 	List<Statistic> getColumnStatistics(String location, String column, Date startDate,
 			Date endDate, Integer weekday, Double max, Double min, StatisticType type);
+	Map<Integer, List<Statistic>> getColumnStatistics(String location, String column, Date startDate,
+			Date endDate, String weekdays, Double max, Double min, StatisticType type);
 
 }

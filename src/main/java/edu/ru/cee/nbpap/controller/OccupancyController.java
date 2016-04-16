@@ -2,6 +2,7 @@ package edu.ru.cee.nbpap.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,7 +37,7 @@ public class OccupancyController {
                 startTime, endTime);
     }
 
-    @RequestMapping(value = "/meanhour", method = RequestMethod.GET)
+    @RequestMapping(value = "/retired/meanhour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> meanHour(
             @RequestParam(required = false) String location,
@@ -50,7 +51,7 @@ public class OccupancyController {
                 endDate, weekday, max, min, StatisticType.AVG);
     }
 
-    @RequestMapping(value = "/occupancy/stdhour", method = RequestMethod.GET)
+    @RequestMapping(value = "/retired/stdhour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> stdHour(
             @RequestParam(required = false) String location,
@@ -62,5 +63,33 @@ public class OccupancyController {
             @RequestParam(required = false) Double min) {
         return service.getColumnStatistics(location, column, startDate,
                 endDate, weekday, max, min, StatisticType.STD);
+    }
+    
+    @RequestMapping(value = "/meanhour", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<Integer, List<Statistic>> meanHour(
+            @RequestParam(required = false) String location,
+            @RequestParam(required = true) String column,
+            @RequestParam(required = false) Date startDate,
+            @RequestParam(required = false) Date endDate,
+            @RequestParam(required = false) String weekdays,
+            @RequestParam(required = false) Double max,
+            @RequestParam(required = false) Double min) {
+        return service.getColumnStatistics(location, column, startDate,
+                endDate, weekdays, max, min, StatisticType.AVG);
+    }
+
+    @RequestMapping(value = "/stdhour", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<Integer, List<Statistic>> stdHour(
+            @RequestParam(required = false) String location,
+            @RequestParam(required = true) String column,
+            @RequestParam(required = false) Date startDate,
+            @RequestParam(required = false) Date endDate,
+            @RequestParam(required = false) String weekdays,
+            @RequestParam(required = false) Double max,
+            @RequestParam(required = false) Double min) {
+        return service.getColumnStatistics(location, column, startDate,
+                endDate, weekdays, max, min, StatisticType.STD);
     }
 }

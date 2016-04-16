@@ -13,5 +13,7 @@ public interface OccupancyDao {
 			List<Integer> weekdays, Date startTime, Date endTime);
 	List<Object[]> getColumnStatistics(String location, String column, Date startDate,
 			Date endDate, Integer weekday, Double max, Double min, StatisticType type);
+	List<Object[]> getColumnStatistics(String location, String column, Date startDate,
+			Date endDate, List<Integer> weekdays, Double max, Double min, StatisticType type);
 
 }
