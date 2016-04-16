@@ -1,6 +1,7 @@
 package edu.ru.cee.nbpap.dao.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "occupancy")
@@ -101,6 +103,15 @@ public class Occupancy implements Serializable {
 
     public void setOccupancy(double occupancy) {
         this.occupancy = occupancy;
+    }
+    
+    @Transient
+    public String getFormattedDatetime() {
+    	if (datetime != null) {
+    		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+    		return format.format(datetime);
+    	}
+    	return null;
     }
 
 }	
