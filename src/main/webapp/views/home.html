@@ -1,1 +1,63 @@
-<h1>Home</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span>Time Series</span>
+  </div>
+  <div class="panel-body">
+    <div class="form-inline">
+      <div class="form-group">
+        <label for="location">Location:</label> 
+        <select class="form-control" id="location">
+          <option value="DPWellness">DPWellness</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="start-date">Start Date:</label> 
+        <div class='input-group date' id='start-date'>
+          <input type='text' class="form-control" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="end-date">End Date:</label> 
+        <div class='input-group date' id='end-date'>
+          <input type='text' class="form-control" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="start-time">Start Time:</label> 
+        <div class='input-group date' id='start-time'>
+          <input type='text' class="form-control" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="end-time">End Time:</label> 
+        <div class='input-group date' id='end-time'>
+          <input type='text' class="form-control" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <button class="btn btn-default" ng-click="plotChart()">Plot</button>
+    </div>
+    <hr>
+    <div google-chart chart="chartObject" style="width:100%; height:500px;"></div>
+  </div> <!-- /.panel-body -->
+</div> <!-- /.panel -->
+
+<script>
+$(function() {
+  $('#start-date').datetimepicker({format: 'MM/DD/YYYY'});
+  $('#end-date').datetimepicker({format: 'MM/DD/YYYY'});
+  $('#start-time').datetimepicker({format: 'HH:mm'});
+  $('#end-time').datetimepicker({format: 'HH:mm'});
+});
+</script>
