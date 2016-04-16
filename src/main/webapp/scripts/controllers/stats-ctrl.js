@@ -11,7 +11,7 @@ nbpaApp.controller('StatsCtrl', ['$scope', '$http',
       data.location = $('#location').val();
       data.column = $('#attribute').val();
       data.weekday = $('#weekday').val();
-      //data.min = 0.0;
+      data.min = 0.0;
       $http({
         method: 'GET',
         url: HOST_URL + '/api/occupancy/meanhour',

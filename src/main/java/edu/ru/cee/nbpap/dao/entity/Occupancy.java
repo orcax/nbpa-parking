@@ -23,9 +23,9 @@ public class Occupancy implements Serializable {
 	private Location location;
 	private Date datetime;
 	private int weekday;
-	private int dailyNumber;
-	private int monthlyNumber;
-	private int totalNumber;
+	private double dailyNumber;
+	private double monthlyNumber;
+	private double totalNumber;
 	private double occupancy;
 	
 	@Id
@@ -68,29 +68,29 @@ public class Occupancy implements Serializable {
     }
 
 	@Column(name = "daily_number")
-    public int getDailyNumber() {
+    public double getDailyNumber() {
         return dailyNumber;
     }
 
-    public void setDailyNumber(int dailyNumber) {
+    public void setDailyNumber(double dailyNumber) {
         this.dailyNumber = dailyNumber;
     }
 
 	@Column(name = "monthly_number")
-    public int getMonthlyNumber() {
+    public double getMonthlyNumber() {
         return monthlyNumber;
     }
 
-    public void setMonthlyNumber(int monthlyNumber) {
+    public void setMonthlyNumber(double monthlyNumber) {
         this.monthlyNumber = monthlyNumber;
     }
 
 	@Column(name = "total_number")
-    public int getTotalNumber() {
+    public double getTotalNumber() {
         return totalNumber;
     }
 
-    public void setTotalNumber(int totalNumber) {
+    public void setTotalNumber(double totalNumber) {
         this.totalNumber = totalNumber;
     }
 
