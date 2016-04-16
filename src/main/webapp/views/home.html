@@ -29,27 +29,11 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="start-time">Start Time:</label> 
-        <div class='input-group date' id='start-time'>
-          <input type='text' class="form-control" />
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
+        <button class="btn btn-default" ng-click="plotChart()">Plot!</button>
       </div>
-      <div class="form-group">
-        <label for="end-time">End Time:</label> 
-        <div class='input-group date' id='end-time'>
-          <input type='text' class="form-control" />
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-      </div>
-      <button class="btn btn-default" ng-click="plotChart()">Plot</button>
     </div>
     <hr>
-    <div google-chart chart="chartObject" style="width:100%; height:500px;"></div>
+    <div id="stock-chart" style="width:100%; height:500px;"></div>
   </div> <!-- /.panel-body -->
 </div> <!-- /.panel -->
 

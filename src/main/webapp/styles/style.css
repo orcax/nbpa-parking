@@ -13,5 +13,20 @@ body {
 }
 
 .container {
-  width: 1024px;
+  width: 1200px;
+}
+
+.form-group {
+  margin: 5px 15px 5px 0;
+}
+
+label {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.btn {
+  width: 80px;
+  font-size: 18px;
+  font-weight: 500;
 }

@@ -9,7 +9,7 @@ var HOST_URL = 'http://localhost:8080';
 var nbpaApp = angular.module(APP_NAME, [
   'ngRoute',
   'ngSanitize',
-  'googlechart'
+  //'googlechart'
 ]);
 
 /**

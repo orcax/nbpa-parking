@@ -37,7 +37,7 @@ public class OccupancyController {
                 startTime, endTime);
     }
 
-    @RequestMapping(value = "/retired/meanhour", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/meanhour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> meanHour(
             @RequestParam(required = false) String location,
@@ -51,7 +51,7 @@ public class OccupancyController {
                 endDate, weekday, max, min, StatisticType.AVG);
     }
 
-    @RequestMapping(value = "/retired/stdhour", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/stdhour", method = RequestMethod.GET)
     @ResponseBody
     public List<Statistic> stdHour(
             @RequestParam(required = false) String location,
@@ -65,7 +65,7 @@ public class OccupancyController {
                 endDate, weekday, max, min, StatisticType.STD);
     }
     
-    @RequestMapping(value = "/meanhour", method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/meanhour", method = RequestMethod.GET)
     @ResponseBody
     public Map<Integer, List<Statistic>> meanHour(
             @RequestParam(required = false) String location,
@@ -79,7 +79,7 @@ public class OccupancyController {
                 endDate, weekdays, max, min, StatisticType.AVG);
     }
 
-    @RequestMapping(value = "/stdhour", method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/stdhour", method = RequestMethod.GET)
     @ResponseBody
     public Map<Integer, List<Statistic>> stdHour(
             @RequestParam(required = false) String location,

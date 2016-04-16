@@ -27,40 +27,59 @@ nbpaApp.controller('StatsCtrl', ['$scope', '$http',
       var endDate = $('#end-date input').val().trim()
       if(endDate != '') data.endDate = endDate;
       data.min = 0;
-      console.log(data);
       $http({
         method: 'GET',
-        url: HOST_URL + '/api/occupancy/meanhour',
+        url: HOST_URL + '/api/occupancy/v2/meanhour',
         params: data
       }).then(
         function success(resp) {
-          $scope.chartObject = createChartObj(resp.data);
+          var result = resp.data;
+          createChart(result);
         },
         function error(resp) {
         }
       );
     }
     
-    function createChartObj(data) {
-      var chartObj = {};
-      chartObj.type = 'LineChart';
-      chartObj.data = new google.visualization.DataTable();
-      chartObj.data.addColumn('string', 'Hour');
-      chartObj.data.addColumn('number', 'Average Number');
-      var rows = [];
+    function createChart(data) {
+      var categories = [];
+      var series = [];
       for(var i in data) {
-        rows.push([data[i]['time'], data[i]['value']]);
-      }
-      chartObj.data.addRows(rows);
-      chartObj.options = {
-        vAxis: {
-          title: 'Average Number',
-        },
-        hAxis: {
-          title: 'Hour',
+        var s = {
+          name: int2Weekday(i),
+          data: []
+        };
+        var c = [];
+        for(var j in data[i]) {
+          c.push(data[i][j]['time']);
+          s.data.push([data[i][j]['time'], data[i][j]['value']]);
         }
-      };
-      return chartObj;
+        if(categories.length == 0) categories = c;
+        series.push(s);
+      }
+      console.log(categories);
+      console.log(series);
+      $('#line-chart').highcharts({
+        title: {
+          text: 'Hourly Average Number',
+          x: -20 //center
+        },
+        xAxis: {
+          type: 'category',
+        },
+        yAxis: {
+          title: {
+            text: 'Average Number'
+          }
+        },
+        legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0
+        },
+        series: series
+      });
     }
     
   }
