@@ -2,6 +2,11 @@
 
 nbpaApp.controller('HomeCtrl', ['$scope', '$http',
   function($scope, $http) {
+    Highcharts.setOptions({
+      global: {
+        timezoneOffset: 5 * 60
+      }
+    });
 
     /**
      * Plot chart
@@ -56,8 +61,8 @@ nbpaApp.controller('HomeCtrl', ['$scope', '$http',
           }
         },
         tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> <br/>',
-            valueDecimals: 2
+          pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> <br/>',
+          valueDecimals: 2
         },
         series: seriesOptions
     }); 
