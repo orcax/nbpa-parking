@@ -11,8 +11,8 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/context/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-	
-	<context:component-scan base-package="edu.ru.cee.nbpap.controller"/>
-	<mvc:default-servlet-handler/>
-	<mvc:annotation-driven/>
+
+	<context:component-scan base-package="edu.ru.cee.nbpap.controller" />
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven />
 </beans>
