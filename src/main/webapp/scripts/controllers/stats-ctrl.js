@@ -37,6 +37,8 @@ nbpaApp.controller('StatsCtrl', ['$scope', '$http',
           createChart(result);
         },
         function error(resp) {
+        	alert('You have not logged in or the seesion has expired. Please login.');
+            window.location = "/login.html";
         }
       );
     }

@@ -1,4 +1,4 @@
-package edu.ru.cee.nbpap.controller;
+package edu.ru.cee.nbpap.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
