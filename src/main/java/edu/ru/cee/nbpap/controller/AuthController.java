@@ -10,18 +10,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthController {
 
+    public static String projectName = "";
+
     @RequestMapping(value = "api/auth/login", method = RequestMethod.POST)
     public String doLogin(@RequestParam String token, HttpServletRequest request) {
+        if (projectName.isEmpty()) {
+            projectName = request.getContextPath().toString();
+        }
         if ("risk".equals(token)) {
-        	request.getSession().setAttribute("token", token);
+            request.getSession().setAttribute("token", token);
             return "redirect:/index.html";
         }
         return "redirect:/login.html";
     }
-    
+
+    /*
     @RequestMapping(value = "/")
     public String authView() {
-    	return "redirect:/index.html";
+        return "redirect:" + projectName + "/login.html";
     }
+    */
 
 }

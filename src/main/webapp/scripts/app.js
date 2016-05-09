@@ -1,7 +1,7 @@
 'use strict';
 
 var APP_NAME = 'nbpaApp';
-var HOST_URL = 'http://localhost:8080';
+var HOST_URL = 'http://localhost:8080/nbpa-parking';
 
 /**
  * Initialize AngularJs app

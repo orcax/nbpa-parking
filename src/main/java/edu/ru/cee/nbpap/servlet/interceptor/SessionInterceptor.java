@@ -24,22 +24,23 @@ public class SessionInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
+	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp,
 			Object arg2) throws Exception {
-		String token = (String) arg0.getSession().getAttribute("token");
-		if (arg0.getRequestURI().contains("login.html")) {
+		String token = (String) req.getSession().getAttribute("token");
+		String projectName = req.getContextPath().toString();
+		if (req.getRequestURI().contains("login.html")) {
 			if (token != null) {
-				arg1.sendRedirect("/index.html");
+				resp.sendRedirect(projectName + "/index.html");
 				return false;
 			} else {
 				return true;
 			}
 		}
 		if (token == null) {
-			if (arg0.getRequestURI().contains("api/occupancy")) {
-				arg1.sendError(HttpServletResponse.SC_REQUEST_TIMEOUT);
+			if (req.getRequestURI().contains("api/occupancy")) {
+				resp.sendError(HttpServletResponse.SC_REQUEST_TIMEOUT);
 			} else {
-				arg1.sendRedirect("/login.html");
+				resp.sendRedirect(projectName + "/login.html");
 			}
 			return false;
 		}

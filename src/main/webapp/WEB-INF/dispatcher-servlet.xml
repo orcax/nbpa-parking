@@ -21,12 +21,14 @@
 			<property name="useCacheControlHeader" value="true"/>
 			<property name="useCacheControlNoStore" value="true"/>
 		</bean>
+		<!--
 		<mvc:interceptor>
 			<mvc:mapping path="/"/>
 			<mvc:mapping path="/*.html"/>
 			<mvc:mapping path="/api/occupancy/**"/>
 			<bean class="edu.ru.cee.nbpap.servlet.interceptor.SessionInterceptor"/>
 		</mvc:interceptor>
+		-->
 	</mvc:interceptors>
 	<mvc:default-servlet-handler />
 </beans>
